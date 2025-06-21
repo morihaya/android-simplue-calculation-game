@@ -4,14 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.calculationgame.util.ThemeManager
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        // テーマを適用
+        ThemeManager.applyTheme(this)
+        
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        
+        // テーマ切り替えボタン
+        findViewById<ImageButton>(R.id.themeToggleButton).setOnClickListener {
+            ThemeManager.toggleNightMode(this)
+        }
         
         // ゲーム開始ボタン
         findViewById<Button>(R.id.startButton).setOnClickListener {

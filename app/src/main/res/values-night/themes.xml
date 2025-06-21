@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ダークテーマ -->
+    <style name="Theme.CalculationGame" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccentDark</item>
+        <item name="android:windowBackground">@color/darkBackground</item>
+        <item name="android:textColor">@color/darkTextColor</item>
+        <item name="buttonStyle">@style/DarkButtonStyle</item>
+        <item name="themeIconDrawable">@drawable/ic_sun</item>
+    </style>
+
+    <!-- ボタンスタイル（ダークモード） -->
+    <style name="DarkButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>

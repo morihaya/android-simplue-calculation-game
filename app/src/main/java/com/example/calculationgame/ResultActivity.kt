@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.calculationgame.util.ThemeManager
 
 class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        // テーマを適用
+        ThemeManager.applyTheme(this)
+        
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
         

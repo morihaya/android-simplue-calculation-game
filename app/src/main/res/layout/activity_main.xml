@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- テーマ切り替えボタン -->
+    <ImageButton
+        android:id="@+id/themeToggleButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="テーマ切り替え"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:src="?attr/themeIconDrawable"/>
+
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"

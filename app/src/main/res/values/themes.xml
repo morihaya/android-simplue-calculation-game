@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ライトテーマ（デフォルト） -->
+    <style name="Theme.CalculationGame" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/lightBackground</item>
+        <item name="android:textColor">@color/lightTextColor</item>
+        <item name="buttonStyle">@style/LightButtonStyle</item>
+        <item name="themeIconDrawable">@drawable/ic_moon</item>
+    </style>
+
+    <!-- ボタンスタイル（ライトモード） -->
+    <style name="LightButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>

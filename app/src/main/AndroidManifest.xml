@@ -3,12 +3,13 @@
     package="com.example.calculationgame">
 
     <application
+        android:name=".CalculationGameApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="計算ゲーム"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:theme="@style/Theme.CalculationGame">
         
         <activity
             android:name=".MainActivity"

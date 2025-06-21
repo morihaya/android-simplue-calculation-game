@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculationgame.model.GameSession
 import com.example.calculationgame.model.Question
+import com.example.calculationgame.util.ThemeManager
 
 class GameActivity : AppCompatActivity() {
     private lateinit var questionTextView: TextView
@@ -26,6 +27,9 @@ class GameActivity : AppCompatActivity() {
     private lateinit var countDownTimer: CountDownTimer
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        // テーマを適用
+        ThemeManager.applyTheme(this)
+        
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         
