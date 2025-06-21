@@ -49,6 +49,36 @@ class QuestionGenerator(private val difficulty: String) {
             else -> 0
         }
         
-        return Question(firstNumber, secondNumber, operation, correctAnswer)
+        // 選択肢を生成（正解を含む3つの選択肢）
+        val choices = generateChoices(correctAnswer, operation, range)
+        
+        return Question(firstNumber, secondNumber, operation, correctAnswer, choices)
+    }
+    
+    private fun generateChoices(correctAnswer: Int, operation: String, range: Int): List<Int> {
+        val choices = mutableSetOf(correctAnswer)
+        
+        // 選択肢の差の範囲を決定
+        val diffRange = when (operation) {
+            "+" -> 1..5
+            "-" -> 1..5
+            "*" -> 1..3
+            "/" -> 1..2
+            else -> 1..5
+        }
+        
+        // 正解に近い2つの選択肢を追加
+        while (choices.size < 3) {
+            val diff = Random.nextInt(diffRange.first, diffRange.last + 1) * if (Random.nextBoolean()) 1 else -1
+            val wrongAnswer = correctAnswer + diff
+            
+            // 負の数や0は選択肢に含めない（割り算の場合）
+            if (wrongAnswer > 0) {
+                choices.add(wrongAnswer)
+            }
+        }
+        
+        // シャッフルして順番をランダムにする
+        return choices.shuffled()
     }
 }

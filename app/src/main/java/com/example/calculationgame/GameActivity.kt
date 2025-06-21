@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,10 +12,12 @@ import com.example.calculationgame.model.Question
 
 class GameActivity : AppCompatActivity() {
     private lateinit var questionTextView: TextView
-    private lateinit var answerEditText: EditText
-    private lateinit var submitButton: Button
     private lateinit var timerTextView: TextView
     private lateinit var scoreTextView: TextView
+    
+    private lateinit var choice1Button: Button
+    private lateinit var choice2Button: Button
+    private lateinit var choice3Button: Button
     
     private lateinit var gameSession: GameSession
     private var currentQuestion: Question? = null
@@ -30,10 +31,12 @@ class GameActivity : AppCompatActivity() {
         
         // UIコンポーネントの初期化
         questionTextView = findViewById(R.id.questionTextView)
-        answerEditText = findViewById(R.id.answerEditText)
-        submitButton = findViewById(R.id.submitButton)
         timerTextView = findViewById(R.id.timerTextView)
         scoreTextView = findViewById(R.id.scoreTextView)
+        
+        choice1Button = findViewById(R.id.choice1Button)
+        choice2Button = findViewById(R.id.choice2Button)
+        choice3Button = findViewById(R.id.choice3Button)
         
         // 難易度の取得
         val difficulty = getSharedPreferences("game_prefs", MODE_PRIVATE)
@@ -45,60 +48,39 @@ class GameActivity : AppCompatActivity() {
         // 最初の問題を表示
         nextQuestion()
         
-        // 回答送信ボタンのリスナー
-        submitButton.setOnClickListener {
-            checkAnswer()
-        }
-        
-        // 数字キーパッドの設定
-        setupNumericKeypad()
+        // 選択肢ボタンのリスナー設定
+        setupChoiceButtons()
         
         // タイマーの開始
         startTimer()
     }
     
-    private fun setupNumericKeypad() {
-        // 数字ボタン (0-9)
-        for (i in 0..9) {
-            val buttonId = resources.getIdentifier("button$i", "id", packageName)
-            findViewById<Button>(buttonId).setOnClickListener {
-                appendToAnswer(i.toString())
-            }
+    private fun setupChoiceButtons() {
+        choice1Button.setOnClickListener {
+            checkAnswer(choice1Button.text.toString().toInt())
         }
         
-        // クリアボタン
-        findViewById<Button>(R.id.buttonClear).setOnClickListener {
-            answerEditText.setText("")
+        choice2Button.setOnClickListener {
+            checkAnswer(choice2Button.text.toString().toInt())
         }
         
-        // バックスペースボタン
-        findViewById<Button>(R.id.buttonBackspace).setOnClickListener {
-            val currentText = answerEditText.text.toString()
-            if (currentText.isNotEmpty()) {
-                answerEditText.setText(currentText.substring(0, currentText.length - 1))
-                answerEditText.setSelection(answerEditText.text.length)
-            }
+        choice3Button.setOnClickListener {
+            checkAnswer(choice3Button.text.toString().toInt())
         }
-    }
-    
-    private fun appendToAnswer(digit: String) {
-        val currentText = answerEditText.text.toString()
-        answerEditText.setText(currentText + digit)
-        answerEditText.setSelection(answerEditText.text.length)
     }
     
     private fun nextQuestion() {
         currentQuestion = gameSession.nextQuestion()
         questionTextView.text = currentQuestion?.getQuestionText()
-        answerEditText.text.clear()
-        answerEditText.requestFocus()
+        
+        // 選択肢を設定
+        val choices = currentQuestion?.choices ?: listOf(0, 0, 0)
+        choice1Button.text = choices[0].toString()
+        choice2Button.text = choices[1].toString()
+        choice3Button.text = choices[2].toString()
     }
     
-    private fun checkAnswer() {
-        val userAnswerStr = answerEditText.text.toString()
-        if (userAnswerStr.isEmpty()) return
-        
-        val userAnswer = userAnswerStr.toIntOrNull() ?: return
+    private fun checkAnswer(userAnswer: Int) {
         val currentQ = currentQuestion ?: return
         
         val isCorrect = gameSession.submitAnswer(currentQ, userAnswer)
