@@ -2,10 +2,13 @@ package com.example.calculationgame
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculationgame.util.ThemeManager
+import com.google.android.material.card.MaterialCardView
 
 class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +24,11 @@ class ResultActivity : AppCompatActivity() {
         val accuracy = intent.getFloatExtra("ACCURACY", 0f)
         
         // UIコンポーネントの初期化
+        val resultCard = findViewById<MaterialCardView>(R.id.resultCard)
+        val statsCard = findViewById<MaterialCardView>(R.id.statsCard)
         val scoreTextView = findViewById<TextView>(R.id.finalScoreTextView)
         val statsTextView = findViewById<TextView>(R.id.statsTextView)
+        val newHighScoreTextView = findViewById<TextView>(R.id.newHighScoreTextView)
         val playAgainButton = findViewById<Button>(R.id.playAgainButton)
         val mainMenuButton = findViewById<Button>(R.id.mainMenuButton)
         
@@ -36,8 +42,30 @@ class ResultActivity : AppCompatActivity() {
         
         if (score > highScore) {
             prefs.edit().putInt("high_score", score).apply()
-            findViewById<TextView>(R.id.newHighScoreTextView).visibility = android.view.View.VISIBLE
+            newHighScoreTextView.visibility = View.VISIBLE
+            
+            // 新記録達成時のアニメーション
+            val pulseAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_in)
+            newHighScoreTextView.startAnimation(pulseAnimation)
         }
+        
+        // カードのアニメーション
+        resultCard.alpha = 0f
+        resultCard.translationY = -100f
+        resultCard.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(500)
+            .start()
+        
+        statsCard.alpha = 0f
+        statsCard.translationY = 100f
+        statsCard.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(500)
+            .setStartDelay(300)
+            .start()
         
         // もう一度プレイボタン
         playAgainButton.setOnClickListener {

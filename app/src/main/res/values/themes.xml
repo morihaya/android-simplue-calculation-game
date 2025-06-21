@@ -1,19 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ライトテーマ（デフォルト） -->
-    <style name="Theme.CalculationGame" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/lightBackground</item>
-        <item name="android:textColor">@color/lightTextColor</item>
-        <item name="buttonStyle">@style/LightButtonStyle</item>
+    <!-- ライトテーマ（マテリアルデザイン3ベース） -->
+    <style name="Theme.CalculationGame" parent="Theme.Material3.Light.NoActionBar">
+        <!-- カラーシステム -->
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        
+        <!-- テーマ切り替えアイコン -->
         <item name="themeIconDrawable">@drawable/ic_moon</item>
+        
+        <!-- シェイプスタイル -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.CalculationGame.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.CalculationGame.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.CalculationGame.LargeComponent</item>
     </style>
-
-    <!-- ボタンスタイル（ライトモード） -->
-    <style name="LightButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="android:textColor">@android:color/white</item>
+    
+    <!-- シェイプスタイル定義 -->
+    <style name="ShapeAppearance.CalculationGame.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.CalculationGame.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.CalculationGame.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+    
+    <!-- カードスタイル -->
+    <style name="Widget.CalculationGame.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardElevation">4dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+        <item name="rippleColor">?attr/colorPrimary</item>
+    </style>
+    
+    <!-- ボタンスタイル -->
+    <style name="Widget.CalculationGame.Button" parent="Widget.Material3.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:background">@drawable/button_ripple</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+    
+    <!-- 選択肢ボタンスタイル -->
+    <style name="Widget.CalculationGame.Button.Choice" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:background">@drawable/button_choice_ripple</item>
+        <item name="rippleColor">?attr/colorPrimary</item>
     </style>
 </resources>

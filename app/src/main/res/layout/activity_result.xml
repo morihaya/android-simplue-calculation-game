@@ -7,74 +7,124 @@
     android:layout_height="match_parent"
     tools:context=".ResultActivity">
 
-    <TextView
-        android:id="@+id/resultTitleTextView"
-        android:layout_width="wrap_content"
+    <!-- 結果カード -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/resultCard"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ゲーム終了！"
-        android:textSize="36sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="80dp"/>
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="?attr/colorPrimaryContainer"
+        style="@style/Widget.CalculationGame.Card">
 
-    <TextView
-        android:id="@+id/finalScoreTextView"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/resultTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ゲーム終了！"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnPrimaryContainer"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="100dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/finalScoreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最終スコア: 0"
+                android:textSize="28sp"
+                android:textColor="?attr/colorOnPrimaryContainer"/>
+
+            <TextView
+                android:id="@+id/newHighScoreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新記録達成！"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorTertiary"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 統計カード -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/statsCard"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="最終スコア: 0"
-        android:textSize="28sp"
-        app:layout_constraintTop_toBottomOf="@id/resultTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/resultCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        style="@style/Widget.CalculationGame.Card">
 
-    <TextView
-        android:id="@+id/newHighScoreTextView"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="統計情報"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/statsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="解答数: 0\n正答率: 0%"
+                android:textSize="18sp"
+                android:lineSpacingExtra="8dp"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ボタン -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="新記録達成！"
-        android:textSize="24sp"
-        android:textColor="#FF9800"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/finalScoreTextView"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_margin="16dp">
 
-    <TextView
-        android:id="@+id/statsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="解答数: 0\n正答率: 0%"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/newHighScoreTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/playAgainButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="もう一度プレイ"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"
+            style="@style/Widget.CalculationGame.Button"/>
 
-    <Button
-        android:id="@+id/playAgainButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="もう一度プレイ"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/statsTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"/>
-
-    <Button
-        android:id="@+id/mainMenuButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="メインメニューへ"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/playAgainButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mainMenuButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="メインメニューへ"
+            android:textSize="18sp"
+            style="@style/Widget.Material3.Button.OutlinedButton"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,11 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.calculationgame.model.GameSession
 import com.example.calculationgame.model.Question
 import com.example.calculationgame.util.ThemeManager
+import com.google.android.material.progressindicator.LinearProgressIndicator
 
 class GameActivity : AppCompatActivity() {
     private lateinit var questionTextView: TextView
     private lateinit var timerTextView: TextView
     private lateinit var scoreTextView: TextView
+    private lateinit var timerProgressBar: LinearProgressIndicator
     
     private lateinit var choice1Button: Button
     private lateinit var choice2Button: Button
@@ -37,6 +39,7 @@ class GameActivity : AppCompatActivity() {
         questionTextView = findViewById(R.id.questionTextView)
         timerTextView = findViewById(R.id.timerTextView)
         scoreTextView = findViewById(R.id.scoreTextView)
+        timerProgressBar = findViewById(R.id.timerProgressBar)
         
         choice1Button = findViewById(R.id.choice1Button)
         choice2Button = findViewById(R.id.choice2Button)
@@ -91,19 +94,57 @@ class GameActivity : AppCompatActivity() {
         
         if (isCorrect) {
             scoreTextView.text = "スコア: ${gameSession.score}"
-            Toast.makeText(this, "正解!", Toast.LENGTH_SHORT).show()
+            // 正解時のアニメーション効果
+            showCorrectAnswerFeedback()
         } else {
-            Toast.makeText(this, "不正解! 正解は ${currentQ.correctAnswer}", Toast.LENGTH_SHORT).show()
+            // 不正解時のアニメーション効果
+            showIncorrectAnswerFeedback(currentQ.correctAnswer)
         }
         
         nextQuestion()
     }
     
+    private fun showCorrectAnswerFeedback() {
+        // 正解時のトースト表示とアニメーション
+        Toast.makeText(this, "正解!", Toast.LENGTH_SHORT).show()
+        
+        // スコア表示のアニメーション
+        scoreTextView.animate()
+            .scaleX(1.2f)
+            .scaleY(1.2f)
+            .setDuration(200)
+            .withEndAction {
+                scoreTextView.animate()
+                    .scaleX(1.0f)
+                    .scaleY(1.0f)
+                    .setDuration(200)
+                    .start()
+            }
+            .start()
+    }
+    
+    private fun showIncorrectAnswerFeedback(correctAnswer: Int) {
+        // 不正解時のトースト表示
+        Toast.makeText(this, "不正解! 正解は $correctAnswer", Toast.LENGTH_SHORT).show()
+    }
+    
     private fun startTimer() {
+        // プログレスバーの初期設定
+        timerProgressBar.max = gameTimeSeconds
+        timerProgressBar.progress = gameTimeSeconds
+        
         countDownTimer = object : CountDownTimer(gameTimeSeconds * 1000L, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsLeft = millisUntilFinished / 1000
                 timerTextView.text = "残り時間: $secondsLeft 秒"
+                
+                // プログレスバーを更新
+                timerProgressBar.progress = secondsLeft.toInt()
+                
+                // 残り時間が少なくなったら警告色に変更
+                if (secondsLeft <= 10) {
+                    timerProgressBar.setIndicatorColor(getColor(R.color.wrong_answer))
+                }
             }
             
             override fun onFinish() {
