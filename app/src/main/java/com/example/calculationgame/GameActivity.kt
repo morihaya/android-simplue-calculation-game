@@ -63,17 +63,29 @@ class GameActivity : AppCompatActivity() {
     }
     
     private fun setupChoiceButtons() {
-        choice1Button.setOnClickListener {
-            checkAnswer(choice1Button.text.toString().toInt())
+        val clickListener = { button: Button ->
+            // ボタンをタップしたときのアニメーション効果
+            button.animate()
+                .scaleX(0.95f)
+                .scaleY(0.95f)
+                .setDuration(100)
+                .withEndAction {
+                    button.animate()
+                        .scaleX(1.0f)
+                        .scaleY(1.0f)
+                        .setDuration(100)
+                        .withEndAction {
+                            // アニメーション完了後に回答をチェック
+                            checkAnswer(button.text.toString().toInt())
+                        }
+                        .start()
+                }
+                .start()
         }
         
-        choice2Button.setOnClickListener {
-            checkAnswer(choice2Button.text.toString().toInt())
-        }
-        
-        choice3Button.setOnClickListener {
-            checkAnswer(choice3Button.text.toString().toInt())
-        }
+        choice1Button.setOnClickListener { clickListener(choice1Button) }
+        choice2Button.setOnClickListener { clickListener(choice2Button) }
+        choice3Button.setOnClickListener { clickListener(choice3Button) }
     }
     
     private fun nextQuestion() {
@@ -105,13 +117,13 @@ class GameActivity : AppCompatActivity() {
     }
     
     private fun showCorrectAnswerFeedback() {
-        // 正解時のトースト表示とアニメーション
+        // 正解時のトースト表示
         Toast.makeText(this, "正解!", Toast.LENGTH_SHORT).show()
         
         // スコア表示のアニメーション
         scoreTextView.animate()
-            .scaleX(1.2f)
-            .scaleY(1.2f)
+            .scaleX(1.5f)
+            .scaleY(1.5f)
             .setDuration(200)
             .withEndAction {
                 scoreTextView.animate()
@@ -121,11 +133,27 @@ class GameActivity : AppCompatActivity() {
                     .start()
             }
             .start()
+            
+        // 問題カード全体を一瞬緑色に
+        val questionCard = findViewById<com.google.android.material.card.MaterialCardView>(R.id.questionCard)
+        val originalCardColor = questionCard.cardBackgroundColor.defaultColor
+        questionCard.setCardBackgroundColor(getColor(R.color.correct_answer))
+        questionCard.postDelayed({
+            questionCard.setCardBackgroundColor(originalCardColor)
+        }, 300)
     }
     
     private fun showIncorrectAnswerFeedback(correctAnswer: Int) {
         // 不正解時のトースト表示
         Toast.makeText(this, "不正解! 正解は $correctAnswer", Toast.LENGTH_SHORT).show()
+        
+        // 問題カード全体を一瞬赤色に
+        val questionCard = findViewById<com.google.android.material.card.MaterialCardView>(R.id.questionCard)
+        val originalCardColor = questionCard.cardBackgroundColor.defaultColor
+        questionCard.setCardBackgroundColor(getColor(R.color.wrong_answer))
+        questionCard.postDelayed({
+            questionCard.setCardBackgroundColor(originalCardColor)
+        }, 300)
     }
     
     private fun startTimer() {

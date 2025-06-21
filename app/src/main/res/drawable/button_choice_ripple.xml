@@ -3,9 +3,9 @@
     android:color="?attr/colorPrimaryVariant">
     <item>
         <shape android:shape="rectangle">
-            <stroke android:color="?attr/colorPrimary" android:width="2dp" />
-            <corners android:radius="16dp" />
-            <solid android:color="@android:color/transparent" />
+            <stroke android:color="?attr/colorPrimary" android:width="3dp" />
+            <corners android:radius="20dp" />
+            <solid android:color="?attr/colorSurface" />
         </shape>
     </item>
 </ripple>

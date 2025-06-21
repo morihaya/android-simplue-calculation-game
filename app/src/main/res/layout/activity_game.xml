@@ -104,7 +104,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="12"
-            android:textSize="24sp"
+            android:textSize="36sp"
+            android:textStyle="bold"
             android:layout_marginBottom="16dp"
             style="@style/Widget.CalculationGame.Button.Choice"/>
 
@@ -113,7 +114,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="13"
-            android:textSize="24sp"
+            android:textSize="36sp"
+            android:textStyle="bold"
             android:layout_marginBottom="16dp"
             style="@style/Widget.CalculationGame.Button.Choice"/>
 
@@ -122,7 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="14"
-            android:textSize="24sp"
+            android:textSize="36sp"
+            android:textStyle="bold"
             style="@style/Widget.CalculationGame.Button.Choice"/>
     </LinearLayout>
 

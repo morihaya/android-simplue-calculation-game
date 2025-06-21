@@ -76,13 +76,15 @@
     
     <!-- 選択肢ボタンスタイル -->
     <style name="Widget.CalculationGame.Button.Choice" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="android:textSize">20sp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="cornerRadius">16dp</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+        <item name="cornerRadius">20dp</item>
         <item name="strokeColor">?attr/colorPrimary</item>
-        <item name="strokeWidth">2dp</item>
+        <item name="strokeWidth">3dp</item>
         <item name="android:background">@drawable/button_choice_ripple</item>
         <item name="rippleColor">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
     </style>
 </resources>
