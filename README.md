@@ -1,4 +1,5 @@
-# 計算ゲーム (Calculation Game)
+# android-simplue-calculation-game
+計算ゲーム (Calculation Game)
 
 Androidで動作する連続計算問題ゲームアプリです。制限時間内にできるだけ多くの計算問題を解いて高得点を目指しましょう！
 
